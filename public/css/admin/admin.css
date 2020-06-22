@@ -1,0 +1,33 @@
+body {
+    background-image: url('http://mauweb.monamedia.net/gwatch/wp-content/uploads/2018/11/black_background_metal.jpg');
+}
+
+.dashboard h3 {
+    font-weight: 30px;
+    text-transform: uppercase;
+    color: white;
+}
+
+.dashboard form button {
+    color: black;
+    text-transform: uppercase;
+    border: 2px solid;
+    border-radius: 3em;
+    height: 50px;
+    width: auto;
+    padding: 10px;
+}
+
+.dashboard form button:hover {
+    background-color: aqua;
+    text-decoration: none;
+}
+
+.dashboard {
+    text-align: center;
+    padding: 3em;
+}
+
+.button {
+    display: inline-block;
+}

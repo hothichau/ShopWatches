@@ -1,0 +1,129 @@
+p {
+    color: #999;
+    line-height: 25px;
+}
+
+h2,
+h3 {
+    color: #fff;
+}
+
+h2 {
+    font-size: 18px;
+}
+
+.footer-top {
+    background: #111;
+    padding: 50px 0;
+    margin-top: 5%;
+}
+
+.sequent-one h3 a {
+    font-family: 'Verdana';
+    color: #fff;
+    letter-spacing: 1px;
+    font-size: 13px;
+}
+
+.sequent-two h3 {
+    color: #fff;
+    font-family: 'Verdana';
+    text-transform: uppercase;
+}
+
+.sequent-two h3::before {
+    color: #c65039;
+    padding-right: 10px;
+}
+
+.sequent-two ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.sequent-two ul li {
+    border-bottom: 1px solid #fff;
+    line-height: 40px;
+}
+
+.sequent-two ul li a {
+    color: #999;
+    text-decoration: none;
+}
+
+
+/*-------------------------------*/
+
+.sequent-three h3 {
+    color: #fff;
+    font-family: 'Verdana';
+    text-transform: uppercase;
+}
+
+.sequent-three h3::before {
+    color: #c65039;
+    padding-right: 10px;
+}
+
+.sequent-three ul {
+    margin: 0;
+    padding: 0;
+    list-style-type: disc;
+}
+
+.sequent-three ul li {
+    line-height: 40px;
+}
+
+.sequent-three ul li a {
+    color: #999;
+    text-decoration: none;
+}
+
+
+/*---------------------------------------*/
+
+.sequent-four h3 {
+    color: #fff;
+    font-family: 'Verdana';
+    text-transform: uppercase;
+}
+
+.sequent-four h2 {
+    color: #fff;
+    font-family: 'Verdana';
+    text-transform: uppercase;
+}
+
+.sequent-four form input[type=submit] {
+    background: #c65039;
+    border: none;
+    margin-left: -5px;
+    color: #fff;
+    text-transform: uppercase;
+    width: 50px;
+}
+
+.sequent-four a {
+    background: #494848;
+    width: 40px;
+    height: 40px;
+    display: inline-block;
+    border-radius: 50%;
+}
+
+.sequent-four a i {
+    font-size: 20px;
+    color: #fff;
+    /* padding: 20px 0; */
+    padding-left: 13px;
+    padding-top: 10px;
+}
+
+.footer-bottom-text {
+    text-align: center;
+    background: #000;
+    /* line-height: 30px; */
+    margin-bottom: 0px;
+}
