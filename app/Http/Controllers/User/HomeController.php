@@ -9,11 +9,21 @@ use App\Category;
 class HomeController extends Controller
 {
     
-    function index()
+    function index(Request $request)
     {
-        $products = Product::all();
+        $page = $request->page;
         $category = Category::all();
-        return view("user.home",["body"=>$products,"cate"=>$category]);
+        $products = Product::all()->skip($page * 8)->take(8);
+        if($products->isEmpty()){ //Nếu photo lớn hơn số lượng trong database sẽ trả về 0
+                $products = Product::all()->take(8);
+            return redirect('user/home/?page=0');
+        }else if($page<0){
+            $totalPage = round(count(Product::all())/8)-1;
+            return redirect('user/home/?page='.$totalPage);
+        }
+
+        return view('user.home', ["product" => $products, "cate"=>$category, "page" => $page]);
+        
     }
     function search(Request $request)
     {

@@ -161,3 +161,11 @@ body {
     font-weight: bold;
     font-size: 50px;
 }
+
+.pagination a {
+    margin: 7px;
+}
+
+.pagination a i {
+    color: white;
+}

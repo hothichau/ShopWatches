@@ -28,7 +28,7 @@ echo "<script> alert('" . $_GET['cart'] . "'); </script>";
         <h3 class="h3">Sản phẩm </h3>
         <hr>
         <div class="row">
-            @foreach ($body as $watches)
+            @foreach ($product as $watches)
             <div class="col-md-3 col-sm-6">
                 <div class="product-grid6">
                     <div class="product-image6">
@@ -54,6 +54,14 @@ echo "<script> alert('" . $_GET['cart'] . "'); </script>";
             </div>
             @endforeach
         </div>
+        <center>
+        <div class = "pagination">
+            <a style = "margin: 7px;"href="/user/home/?page={{$page-1}}"><i style = "color: white" class="fas fa-backward" title = "Previous"></i></a>
+           <a style = "margin: 7px;"href="/user/home/?page={{$page+1}}"><i style = "color: white" class="fas fa-forward" title = "Next"></i></a>
+            
+        </div>
+        </center>
+      
     </div>
 </body>
 
