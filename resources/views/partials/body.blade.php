@@ -16,29 +16,39 @@
 </head>
 
 <body>
+    <?php
+if (isset($_GET['error'])) {
+echo "<script> alert('" . $_GET['error'] . "'); </script>";
+}
+if (isset($_GET['cart'])) {
+echo "<script> alert('" . $_GET['cart'] . "'); </script>";
+}
+?>
     <div class="container">
         <h3 class="h3">Sản phẩm </h3>
         <hr>
         <div class="row">
-            @foreach ($dashboard as $hotels)
+            @foreach ($body as $watches)
             <div class="col-md-3 col-sm-6">
                 <div class="product-grid6">
                     <div class="product-image6">
                         <a href="#">
-                            <img class="pic-1" src="{{'/storage/'.$hotels->image}}">
+                            <img class="pic-1" src="{{'/storage/'.$watches->image}}">
                         </a>
                     </div>
                     <div class="product-content">
-                        <h3 class="title"><a href="#">{{$hotels->name}}</a></h3>
-                        <div class="price">{{$hotels->oldPrice}}
-                            <span>{{$hotels->newPrice}}</span>
+                        <h3 class="title"><a href="#">{{$watches->name}}</a></h3>
+                        <div class="price">{{$watches->getDisplayoldPrice()}}
+                            <span>{{$watches->getDisplaynewPrice()}}</span>
                         </div>
                     </div>
                     <ul class="social">
                         <!-- <li><a href="" data-tip="Quick View"><i class="fa fa-search"></i></a></li> -->
-                        <li><a href="/user/watches/{{$watches->id}}/show" data-tip="View detail"><i class="fa fa-shopping-bag"></i></a></li>
-                        
-                        <li><a href="/user/cart/{{$watches->id}}/cart" data-tip="Add to Cart" value = ""><i class="fa fa-shopping-cart"></i></a></li>
+                        <li><a href="/user/watches/{{$watches->id}}/show" data-tip="View detail"><i
+                                    class="fa fa-shopping-bag"></i></a></li>
+
+                        <li><a href="/addToCart/{{$watches->id}}" data-tip="Add to Cart" value=""><i
+                                    class="fa fa-shopping-cart"></i></a></li>
                     </ul>
                 </div>
             </div>

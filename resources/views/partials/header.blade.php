@@ -37,32 +37,46 @@
             </div>
         </div>
     </div>
-    <ul class="ul">
-        <li><a href="{{ url('/user/home') }}">Trang chủ</a></li>
-        <li><a href="#">Giới thiệu</a></li>
-        <li><a href="#">Sản phẩm</a></li>
-        @if( Auth::user())
-           @if(Auth::user()->role == "admin")
-            <li><a href="{{ url('/admin/dashboard') }}">Quản lý</a></li>
-           @endif
-        else
-            @if(Auth::user()->role == "user")
-            <li><a href="">Liên hệ</a></li>
-           @endif
-        @endif
-        <li class="logo"> <img src="http://mauweb.monamedia.net/gwatch/wp-content/uploads/2018/11/logo-mwatch-02.png"
-                alt="" style="height: 70px; width: auto;"> </li>
 
-        <li class="search-icon">
-        <form class="navbar-form navbar-left" action="/admin/watches/find" method="post">
-        @csrf
-            <input type="search" placeholder="Tìm kiếm"><button name="txtSearch" class="icon"><i
-                    class="fas fa-search"></i></button>
-        </form>
-        </li>
-        <span class="w3-bar-right">
-            <a class="cart" href="#projects">Giỏ hàng <span> / </span> <i class="fas fa-cart-plus"></i> </a>
-    </ul>
+    <div class="wrapper">
+        <nav class="menu">
+            <ul class="clearfix">
+                <li class="logo"> <img
+                        src="http://mauweb.monamedia.net/gwatch/wp-content/uploads/2018/11/logo-mwatch-02.png" alt=""
+                        style="height: 40px; width: auto;padding: 5px;"> </li>
+                <li class="current-item"><a href="{{ url('/user/home') }}">Trang chủ</a></li>
+                <li>
+                    <a href="#">Sản phẩm<span class="arrow">&#9660;</span></a>
+
+                    <ul class="sub-menu">
+                    @foreach($cate as $category)
+                        <li><a href="#">{{$category->name}}</a></li>
+                    @endforeach    
+                    </ul>
+                </li>
+                @if( Auth::user())
+                    @if(Auth::user()->role == "admin")
+                    <li><a href="{{ url('/admin/dashboard') }}">Quản lý</a></li>
+                    @endif
+                    @if(Auth::user()->role == "user" || Auth::user()->role == "")
+                    <li><a href="">Liên hệ</a></li>
+                    @endif
+                @endif
+                <li class="search-icon">
+                    <form class="form-inline md-form mr-auto mb-4" action="/admin/watches/find" method="post">
+                        @csrf
+                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit"><i class="fas fa-search"></i></button>
+                    </form>
+                    </form>
+                </li>
+                <span class="w3-bar-right">
+              
+                    <a class="cart" href="{{ url('/cart') }}">Giỏ hàng <span> / </span> <i class="fas fa-cart-plus"><sup>2</sup></i> </a>
+                   
+            </ul>
+        </nav>
+    </div>
 
 
 </body>

@@ -43,7 +43,7 @@ body {
 </style>
 
 <body>
-    @include('partials/header')
+    
     <div>
         <center>
             <center>
@@ -56,17 +56,24 @@ body {
                 <label for="name"><b>Name</b></label>
                 <input type="text" placeholder="Enter name" name="name" id="name" value="{{$edit->name}}" required>
 
-                <label for="oldPrice"><b>Old Price</b></label>
-                <input type="text" placeholder="Enter oldPrice" name="oldPrice" id="oldPrice"
-                    value="{{$edit->oldPrice}}" required>
+                <label for="old_price"><b>Old Price</b></label>
+                <input type="text" placeholder="Enter oldPrice" name="old_price" id="old_price"
+                    value="{{$edit->old_price}}" required>
 
-                <label for="newPrice"><b>New Price</b></label>
-                <input type="text" placeholder="Enter newPrice" name="newPrice" id="newPrice"
-                    value="{{$edit->newPrice}}" required>
+                <label for="new_price"><b>New Price</b></label>
+                <input type="text" placeholder="Enter newPrice" name="new_price" id="new_price"
+                    value="{{$edit->new_price}}" required>
 
                 <label for="description"><b>Description</b></label>
                 <input type="text" placeholder="Enter description" name="description" id="description"
                     value="{{$edit->description}}" required>
+
+                <label for="category"> Chọn loại sản phẩm</label><br>
+                <select name="category_id" id="category_id" class="form-control">                    
+                @foreach($cate as $categories)
+                    <option value="{{$categories->id}}">{{$categories->name}}</option>                  
+                @endforeach
+                </select>
 
                 <label for="image">Photo</label>
                 <input type="file" id="image" name="image">
@@ -74,7 +81,7 @@ body {
             </form>
         </center>
     </div>
-    @include('partials/footer')
+    
 </body>
 
 </html>

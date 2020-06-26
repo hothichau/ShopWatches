@@ -18,6 +18,9 @@
              <form class = "button" action="/admin/watches">
              <button type = "submit">quản lý sản phẩm </button>  
              </form>
+             <form class = "button" action="/admin/categories">
+             <button type = "submit">quản lý loại sản phẩm </button>  
+             </form>
              </center>     
              
              

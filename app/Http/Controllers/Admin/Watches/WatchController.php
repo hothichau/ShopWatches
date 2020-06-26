@@ -6,60 +6,74 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Admin\Watches;
 use Illuminate\Pagination\Paginator;
-
+use App\Category;
+use App\Product;
 
 class WatchController extends Controller
 {
     function operator()
     {
-        return view('admin/watches/create');
+        $categories = Category::all();
+        return view('admin.watches.create',['categories'=>$categories]);
     }
 
     function index()
     {
-        $product = DB::table('product')->get();
-        return view("admin/watches/index",["index"=>$product]);
+        
+        $products = Product::all();
+        foreach($products as $product){
+            $product->category->name;
+        }
+        return view("admin/watches/index",["index"=>$products]);
     }
+
     function store(Request $request)
     {    
         $name = $request->input("name");
-        $oldPrice = $request->input("oldPrice");
-        $newPrice = $request->input("newPrice");
+        $oldPrice = $request->input("old_price");
+        $newPrice = $request->input("new_price");
         $description = $request->input("description");
+        $category_id = $request->input("category_id");
         $filePath = $request->file('image')->store("public");
        
-        DB::table('product')->insert(["name"=>$name,"oldPrice"=>$oldPrice,"newPrice"=>$newPrice,"description"=>$description,"image"=>$filePath]);
+        DB::table('products')->insert(["name"=>$name,"old_price"=>$oldPrice,"new_price"=>$newPrice,"description"=>$description,"image"=>$filePath,"category_id"=>$category_id]);
         return redirect('/admin/watches');   
     }
     
 
     function edit($id)
     { 
-        $product = DB::table('product')->find($id);
-        return view("admin/watches/edit",["edit"=>$product]);
+       
+        $products = Product::all()->find($id);
+        $categories = Category::all();
+        return view("admin/watches/edit",["edit"=>$products],["cate"=>$categories]);
        
     } 
 
     function update(Request $request, $id)
     {
+        $product = Product::find($id);
+        $category = Category::all();
         $name = $request->name;
-        $oldPrice = $request->oldPrice;
-        $newPrice = $request->newPrice;
+        $oldPrice = $request->old_price;
+        $newPrice = $request->new_price;
         $description = $request->description;
+        $category_id = $request->category_id;
+        
         $filePath = $request->file('image')->store("public");
 
-        DB::table('product')->where("id",$id)->update(["id"=>$id,"name"=>$name,"oldPrice"=>$oldPrice,"newPrice"=>$newPrice,"description"=>$description,"image"=> $filePath ]);
+        DB::table('products')->where("id",$id)->update(["id"=>$id,"name"=>$name,"old_price"=>$oldPrice,"new_price"=>$newPrice,"description"=>$description,"image"=> $filePath,"category_id"=>$category_id]);
         return redirect('/admin/watches');   
     }
     function destroy($id)
     {
-        DB::table('product')->delete(["id"=>$id]);
+        DB::table('products')->delete(["id"=>$id]);
         return redirect('/admin/watches');
     }
 
     function detail($id)
-    {
-        $product = DB::table('product')->find($id);
+    {   
+        $product = Product::find($id);
         return view("/user/watches/show",["show"=>$product]);
     }
 
@@ -67,12 +81,8 @@ class WatchController extends Controller
     {
         $search = $request->get('search');
 
-        $watches = DB::table('product')->where('name','like','%',$search,'%')->paginate();
+        $watches = DB::table('products')->where('name','like','%',$search,'%')->paginate();
         return view('admin/watches/index',['index'=>$watches]);
     }
 
-    
-
-    
-    
 }

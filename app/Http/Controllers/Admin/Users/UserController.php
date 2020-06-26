@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Admin\Users;
-
+use App\User;
 class UserController extends Controller
 {
     function operator()
@@ -15,13 +15,13 @@ class UserController extends Controller
     }
     function index()
     {
-        $users  = DB::table('users')->get();
+        $users = User::all();
         return view("admin/users/index",["index"=>$users]);
     }
 
     function edit($id)
     { 
-        $users = DB::table('users')->find($id);
+        $users = User::all()->find($id);
         return view("admin/users/edit",["edit"=>$users]);
        
     } 
@@ -33,7 +33,7 @@ class UserController extends Controller
         $phone = $request->input("phone");
         $filePath = $request->file('image')->store("public");
        
-        DB::table('product')->insert(["username"=>$name,"password"=>$password,"phone"=>$phone,"role"=>$role,"image"=>$filePath]);
+        DB::table('products')->insert(["username"=>$name,"password"=>$password,"phone"=>$phone,"role"=>$role,"image"=>$filePath]);
         return redirect('/admin/users');   
     }
 

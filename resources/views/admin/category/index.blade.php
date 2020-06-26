@@ -16,12 +16,12 @@
 <body>
     @include('partials/header')
     <center>
-        <h3> Quản lý sản phẩm </h3>
+        <h3> Quản lý loại sản phẩm </h3>
         <a href="/admin/dashboard"><i class="fas fa-arrow-circle-left" style="width: 5em;"></i></a>
     </center>
 
-    <h2> Thêm sản phẩm </h2>
-    <form action="/admin/watches/create" method="get">
+    <h2> Thêm loại sản phẩm </h2>
+    <form action="/admin/categories/create" method="get">
         <button type="submit" class="button button1 " name="add">Thêm </button>
     </form>
     <table id="table">
@@ -30,33 +30,17 @@
             <center>
                 <tr>
                     <th>Id</th>
-                    <th>Tên sản phẩm</th>
-                    <th>Giá cũ</th>
-                    <th>Giá mới</th>
-                    
-                    <th>Mô tả</th>
-                    <th>Hình ảnh</th>
-                    <th>Loại</th>
-                    <th>Tên Loại</th>
+                    <th>Tên loại sản phẩm</th>                   
                     <th>Sửa</th>
                     <th>Xóa</th>
-                    @foreach ($index as $watches)
+                    @foreach ($categories as $category)
                 <tr>
-                    <td> {{$watches->id}}</td>
-                    <td> {{$watches->name}} </td>
-                    <td> {{$watches->old_price}} </td>
-                    <td> {{$watches->new_price}} </td>
-                    <td> {{$watches->description}} </td>
-
-                    <td>
-                        <image src="{{'/storage/'.$watches->image}} " style="height: 100px; width: 80px;">
-                    </td>
-                    <td> {{$watches->category_id}} </td>
-                    <td> {{$watches->category->name}} </td>
-                    <form action='{{"/admin/watches/".$watches->id."/edit"}}' method="get">
+                    <td> {{$category->id}}</td>
+                    <td> {{$category->name}} </td>
+                    <form action='{{"/admin/categories/".$category->id."/edit"}}' method="get">
                         <td> <button type="submit" class="button button1"><i class="far fa-edit"></i> </button></td>
                     </form>
-                    <form action='{{"/admin/watches/".$watches->id}}' method="POST">
+                    <form action='{{"/admin/categories/".$category->id}}' method="POST">
                         @csrf
                         @method("DELETE")
                         <td> <button type="submit" class="button button1"><i class="far fa-calendar-times"></i></button> </td>

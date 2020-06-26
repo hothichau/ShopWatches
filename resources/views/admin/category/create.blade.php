@@ -45,33 +45,15 @@ h3{
 </style>
 <body>
 
-<h3>Thêm sản phẩm</h3>
+<h3>Thêm loại sản phẩm</h3>
 
 <div>
     <center>
-<form action="/admin/watches" method="POST" enctype="multipart/form-data">
+<form action="/admin/categories" method="POST" enctype="multipart/form-data">
      @csrf
-    <label for="name">Tên sản phẩm</label>
+    <label for="name">Tên loại sản phẩm</label>
     <input type="text" id="name" name="name">
 
-    <label for="oldPrice">Giá cũ</label>
-    <input type="text" id="old_price" name="old_price">
-
-    <label for="newPrice">Giá mới</label>
-    <input type="text" id="new_price" name="new_price">
-
-    <label for="description">Mô tả</label>
-    <input type="text" id="description" name="description" >
-    
-    <label for="category"> Chọn loại sản phẩm</label><br>
-       <select name="category_id" id="category_id" class="form-control">
-        @foreach($categories as $category)
-        <option value="{{$category->id}}"> {{$category->name}}</option>
-        @endforeach
-      </select>  
-    <label for="image">Hình ảnh</label>
-    <input type="file" id="image" name="image" >
-  
     <button type="submit" value="Submit">Thêm</button>
   </form>
   </center>

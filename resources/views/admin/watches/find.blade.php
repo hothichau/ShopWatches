@@ -30,8 +30,8 @@
                     </div>
                     <div class="product-content">
                         <h3 class="title"><a href="#">{{$watches->name}}</a></h3>
-                        <div class="price">{{$watches->oldPrice}}
-                            <span>{{$watches->newPrice}}</span>
+                        <div class="price">{{$watches->old_price}}
+                            <span>{{$watches->new_price}}</span>
                         </div>
                     </div>
                     <ul class="social">
