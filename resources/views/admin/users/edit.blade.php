@@ -42,7 +42,7 @@ body {
 }
 </style>
 <body>
-    @include('partials/header')
+   
     <div>
         <center>  
         <center><h3>Cập nhật thông tin tài khoản</h3></center> 
@@ -59,6 +59,10 @@ body {
             <label for="phone">Số điện thoại</label>
             <input type="text" id="phone" name="phone" value = "0{{$edit->phone}}" placeholder="Nhập số điện thoại">
 
+            <label for="address">Số điện thoại</label>
+            <input type="text" id="address" name="address" value = "{{$edit->address}}" placeholder="Nhập xã/phường, quận/huyện, tỉnh/thành phố ">
+
+
             <label for="image">Hình ảnh</label>
             <input type="file" id="image" name="image">
 
@@ -68,7 +72,7 @@ body {
         </form>
         </center>
     </div>
-    @include('partials/footer')
+    
 </body>
 
 </html>

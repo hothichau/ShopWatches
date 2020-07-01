@@ -44,36 +44,40 @@
                 <li class="logo"> <img
                         src="http://mauweb.monamedia.net/gwatch/wp-content/uploads/2018/11/logo-mwatch-02.png" alt=""
                         style="height: 40px; width: auto;padding: 5px;"> </li>
-                <li class="current-item"><a href="{{ url('/user/home') }}">Trang chủ</a></li>
+                <li><a href="{{ url('/user/home') }}">Trang chủ</a></li>
                 <li>
                     <a href="#">Sản phẩm<span class="arrow">&#9660;</span></a>
 
                     <ul class="sub-menu">
+                    <?php $cate = Session::get('categories'); ?>
                     @foreach($cate as $category)
-                        <li><a href="#">{{$category->name}}</a></li>
+                        <li><a href="/categories/{{$category->id}}">{{$category->name}}</a></li>
                     @endforeach    
                     </ul>
                 </li>
-                @if( Auth::user())
+                @if(Auth::user())
                     @if(Auth::user()->role == "admin")
-                    <li><a href="{{ url('/admin/dashboard') }}">Quản lý</a></li>
-                    @endif
-                    @if(Auth::user()->role == "user" || Auth::user()->role == "")
+                        <li><a href="{{ url('/admin/dashboard') }}">Quản lý</a></li>
+                    @elseif(Auth::user()->role == "" || Auth::user()->role == "user")
                     <li><a href="">Liên hệ</a></li>
                     @endif
                 @endif
                 <li class="search-icon">
-                    <form class="form-inline md-form mr-auto mb-4" action="/admin/watches/find" method="post">
+                    <form class="form-inline md-form mr-auto mb-4" action="/search" method="post">
                         @csrf
-                        <input class="form-control mr-sm-2" type="text" placeholder="Search" aria-label="Search">
+                        <input class="form-control mr-sm-2" name = "search" type="text" placeholder="Search" aria-label="Search">
                         <button class="btn btn-outline-warning btn-rounded btn-sm my-0" type="submit"><i class="fas fa-search"></i></button>
                     </form>
                     </form>
                 </li>
-                <span class="w3-bar-right">
-              
-                    <a class="cart" href="{{ url('/cart') }}">Giỏ hàng <span> / </span> <i class="fas fa-cart-plus"><sup>2</sup></i> </a>
-                   
+                <li>
+                @if(Session::has('totalQuantity'))
+                <?php $quantity = Session::get('totalQuantity'); ?>
+                <a style = "font-size: 18px;color: white;" class="cart" href="{{ url('/cart') }}">Giỏ hàng <span> / </span> <i class="fas fa-cart-plus"><sup>( <?php echo $quantity; ?>  )</sup></i> </a>
+                @else
+                <a style = "font-size: 18px;color: white;" class="cart" href="{{ url('/cart') }}">Giỏ hàng <span> / </span> <i class="fas fa-cart-plus"><sup>(0)</sup></i> </a>
+                @endif
+                </li>    
             </ul>
         </nav>
     </div>

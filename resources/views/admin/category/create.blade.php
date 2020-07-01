@@ -50,6 +50,15 @@ h3{
 <div>
     <center>
 <form action="/admin/categories" method="POST" enctype="multipart/form-data">
+@if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
      @csrf
     <label for="name">Tên loại sản phẩm</label>
     <input type="text" id="name" name="name">

@@ -29,6 +29,7 @@ class WatchController extends Controller
 
     function store(Request $request)
     {    
+        
         $name = $request->input("name");
         $oldPrice = $request->input("old_price");
         $newPrice = $request->input("new_price");
@@ -74,15 +75,21 @@ class WatchController extends Controller
     function detail($id)
     {   
         $product = Product::find($id);
-        return view("/user/watches/show",["show"=>$product]);
+        $categories = Category::all();
+        return view("/user/watches/show",["show"=>$product,"cate" => $categories]);
     }
 
     function search(Request $request)
     {
         $search = $request->get('search');
-
-        $watches = DB::table('products')->where('name','like','%',$search,'%')->paginate();
-        return view('admin/watches/index',['index'=>$watches]);
+        $categories = Category::all();
+        // $watches = DB::table('products')->where('name','like','%',$search,'%')->paginate();
+        // return view('admin/watches/index',['index'=>$watches,"cate" => $categories,"search"=>$search]);
+        
+        echo $search;
+        // $watches = Product::search($search)->where('name','like','%',$search,'%')->paginate();
+        // return view('admin/watches/index',['index'=>$watches,"cate" => $categories,"search"=>$search]);
+        
     }
 
 }

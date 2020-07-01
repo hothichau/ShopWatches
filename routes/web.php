@@ -2,23 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
 
 Route::get('/', function () {
     return view('welcome');
-});
-
-Route::get('/carta', function () {
-    return view('/user/cart');
 });
 
 //------------------------------Login------------------------------------------
@@ -35,10 +21,14 @@ Route::post('/auth/register',"Auth\RegisterController@register");
 
 Route::get('/auth/logout',"Auth\LoginController@logout");
 
+//------------------------------Admin------------------------------------------
+
+Route::group(['middleware' => 'App\Http\Middleware\CheckLogin'], function()
+{
+
 //------------------------------Admin/Dashboard--------------------------------
 
 Route::get('/admin/dashboard',"Admin\DashboardController@operator")->name('admin.dashboard'); 
-Route::get('/admin/dashboardd',"Admin\DashboardController@operator")->name('admin.dashboard'); 
 
 //------------------------------Admin/Users------------------------------------
 Route::get('/admin/users/create', 'Admin\Users\UserController@operator');
@@ -59,7 +49,7 @@ Route::post('/admin/watches','Admin\Watches\WatchController@store');
 Route::get('/admin/watches/{id}/edit','Admin\Watches\WatchController@edit');
 Route::patch('/admin/watches/{id}','Admin\Watches\WatchController@update');
 Route::delete('/admin/watches/{id}','Admin\Watches\WatchController@destroy');
-
+});
 //------------------------------User------------------------------------------
 
 Route::get('/user/home', 'User\HomeController@index')->name('user.home');
@@ -69,7 +59,6 @@ Route::get('/user/home', 'User\HomeController@index')->name('user.home');
 Route::get('/cart',"User\CartController@index");
 Route::get('/addToCart/{id}','User\CartController@addToCart');
 Route::delete('/cart/{id}','User\CartController@destroyCartPro');
-Route::post('/cart/update/{id}',"User\CartController@updateQuantity");
 Route::get('/cart/{id}/increase','User\CartController@increaseQuantity');
 Route::get('/cart/{id}/decrease','User\CartController@decreaseQuantity');
 
@@ -81,7 +70,7 @@ Route::get('/user/watches/{id}/show', 'Admin\Watches\WatchController@detail');
 
 //------------------------------User------------------------------------------
 
-Route::post('/admin/watches/find', 'User\HomeController@search');
+Route::post('/search', 'User\HomeController@searchByProName');
 
 //------------------------------Admin/Category---------------------------------
 
@@ -93,3 +82,16 @@ Route::patch('/admin/categories/{id}','Admin\Categories\CategoryController@updat
 Route::delete('/admin/categories/{id}','Admin\Categories\CategoryController@destroy');
 
 Route::get('/admin/categoriess','Admin\Categories\CategoryController@displayCate');
+Route::get('/categories/{id}', 'User\HomeController@displayProCate');
+
+//------------------------------Admin/Order---------------------------------
+Route::get('/admin/orders', 'User\OrderController@showBill');
+//------------------------------Order---------------------------------
+Route::get('/orders', 'User\OrderController@showOrder');
+Route::get('/order', 'User\OrderController@order');
+Route::get('/bill', 'User\OrderController@showBill');
+
+//------------------------------Arrange Product---------------------------------
+Route::get('/ascPrice', 'User\HomeController@ascProductByPrice');
+Route::get('/descPrice', 'User\HomeController@descProductByPrice');
+

@@ -13,9 +13,8 @@ class CategoryController extends Controller
 {
 
     function operator()
-    {
-        $categories = Category::all();
-        return view('admin.category.create',['categories'=>$categories]);
+    {        
+        return view('admin.category.create');
     }
 
     function index()
@@ -24,20 +23,22 @@ class CategoryController extends Controller
         return view('admin.category.index',['categories'=>$categories]);
     }
 
-    function displayCate()
+    function displayCateOnHeader()
     {
         $categories = Category::all();
         return view('partials.header',['categories'=>$categories]);
-       
-       
     }
 
     function store(Request $request)
     {    
-        $name = $request->input("name");
-       
-       
-        DB::table('categories')->insert(["name"=>$name]);
+        $request->validate([
+            'name' => 'required',
+        ]); 
+        $name = $request->input('name');
+        
+        $category = new Category;
+        $category->name = $name;
+        $category->save();
         return redirect('/admin/categories');   
     }
     
@@ -52,17 +53,17 @@ class CategoryController extends Controller
 
     function update(Request $request, $id)
     {
-     
-        $category = Category::find($id);
         $name = $request->name;
-       
-        DB::table('categories')->where("id",$id)->update(["id"=>$id,"name"=>$name]);
+        $category = Category::find($id);
+        $category->name = $name;
+        $category->save();
         return redirect('/admin/categories');   
     }
     function destroy($id)
     {
-        DB::table('categories')->delete(["id"=>$id]);
-        return redirect('/admin/categories');
+        $category = Category::find($id);
+        $category->delete();
+        return redirect('/admin/categories'); 
     }
 
     

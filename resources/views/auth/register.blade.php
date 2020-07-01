@@ -23,6 +23,15 @@
                     </div>
                     <div class="panel-body">
                     <form role = "form" action="/auth/register" method="POST" enctype="multipart/form-data">
+                    @if ($errors->any())
+                        <div class="alert alert-danger">
+                            <ul>
+                                @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                        @endif
                         @csrf
                             <div class="row">
                                 <div class="col-xs-6 col-sm-6 col-md-6">
@@ -33,7 +42,7 @@
                                 </div>
                                 <div class="col-xs-6 col-sm-6 col-md-6">
                                     <div class="form-group">
-                                        <input type="text" name="password" id="password"
+                                        <input type="text" name="phone" id="phone"
                                             class="form-control input-sm" placeholder="Số điện thoại">
                                     </div>
                                 </div>
@@ -42,6 +51,11 @@
                             <div class="form-group">
                                 <input type="file" name="image" id="image" class="form-control input-sm"
                                     placeholder="Ảnh đại diện">
+                            </div>
+
+                            <div class="form-group">
+                                <input type="text" name="address" id="address" class="form-control input-sm"
+                                    placeholder="Nhập xã/phường, quận/huyện, tỉnh/thành phố">
                             </div>
 
                             <div class="row">

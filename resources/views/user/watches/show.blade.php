@@ -8,7 +8,6 @@
 <html>
 
 <body>
-    @include('/partials/header')
     <hr>
     <div class="container" style="padding-top: 100px; color : black">
         <div class="row">
@@ -24,12 +23,9 @@
                 <h6 style="color:#337ab7">Mô tả: <span style="color:#000">{{$show->description}}<span></h6>
                 <!-- Botones de compra -->
                 <div class="section" style="padding-bottom:20px;">
-                <form action="/addToCart/".{{$show->id}}" method = "get">
                     <button class="btn btn-success"><span style="margin-right:20px"
-                            class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span>Thêm vào giỏ
-                        hàng</button>
-                    </form>
-
+                            class="glyphicon glyphicon-shopping-cart" aria-hidden="true"></span><a style = "text-decoration: none; color: white; font-size: 15px; " href="/addToCart/{{$show->id}}">Thêm vào giỏ
+                        hàng</a>  </button>
                 </div>
             </div>
         </div>

@@ -14,10 +14,11 @@
 </head>
 
 <body>
-    @include('partials/header')
+  
     <center>
         <h3> Quản lý sản phẩm </h3>
-        <a href="/admin/dashboard"><i class="fas fa-arrow-circle-left" style="width: 5em;"></i></a>
+        <a href="/admin/users"><i class="fas fa-arrow-circle-left" style="width: 5em;"></i></a>
+        <a href="/admin/categories"><i class="fas fa-arrow-circle-right" style="width: 5em;"></i></a>
     </center>
 
     <h2> Thêm sản phẩm </h2>
@@ -65,7 +66,7 @@
                 @endforeach
 
     </table>
-    @include('partials/footer')
+  
 
 </body>
 

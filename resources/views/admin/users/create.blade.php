@@ -62,6 +62,9 @@ h3{
 
     <label for="image">Hình ảnh</label>
     <input type="file" id="image" name="image" >
+
+    <label for="address">Địa chỉ</label>
+    <input type="text" id="address" name="address" placeholder = " Nhập xã/phường, quận/huyện, tỉnh/thành phố">
   
     <button type="submit" value="Submit">Thêm</button>
   </form>

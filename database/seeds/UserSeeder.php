@@ -17,6 +17,7 @@ class UserSeeder extends Seeder
             'image'=>'public/anh.jpeg',
             'role'=>'admin',
              'phone' => '0395275440',
+             'address' => 'Khe Cau, Ba Lòng, Đakrông, Quảng Trị',
         ]);
 
         DB::table('users')->insert([
@@ -25,6 +26,7 @@ class UserSeeder extends Seeder
             'image'=>'public/anh1.jpeg',
             'role'=>'user',
             'phone'=> '01678187624',
+            'address' => 'Khe Cau, Ba Lòng, Đakrông, Quảng Trị',
         ]);
     }
 }

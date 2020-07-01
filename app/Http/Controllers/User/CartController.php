@@ -35,11 +35,10 @@ class CartController extends Controller
         {
             $user_id = Auth::user()->id;
             $date = now();
-        
             $check = DB::table('carts')
-                    ->where('pro_id',$pro_id)
-                    ->where('user_id',$user_id)
-                    ->count();
+            ->where('pro_id',$pro_id)
+            ->where('user_id',$user_id)
+            ->count();
             if($check == 0)
             {
                 $cart = DB::table('carts')->where('pro_id','=',$pro_id)->first();
@@ -47,7 +46,6 @@ class CartController extends Controller
                     DB::table('carts')->insert(
                         ['pro_id'=>$pro_id, 'quantity' => 1, 'user_id' => $user_id, 'date_order'=>$date]
                     );
-                    // return redirect()->route('/cart', ["cart" => "Thêm vào giỏ hàng Thành Công!"]);
                     return redirect('cart');
                 }
             }
@@ -61,7 +59,6 @@ class CartController extends Controller
                     ->update(
                         ['quantity' => $quantity, 'date_order'=>$date]
                     );
-                    // return redirect()->route('/cart', ["cart" => "Thêm vào giỏ hàng Thành Công"]);
                     return redirect('cart');
                 }
         }else
@@ -76,35 +73,22 @@ class CartController extends Controller
         return redirect('cart');
     }
 
-    function updateQuantity($pro_id, Request $request){
-        $cart = Cart::find($pro_id);
-        $cart->quantity = $request->quantity;
-        echo $cart->quantity;
-        $date = now();
-        DB::table('carts')
-            ->where('pro_id','=',$pro_id)
-            ->update(
-                ['quantity' => $quantity, 'date_order'=>$date]
-            );
-            return redirect ('cart');
-    }
-
     function increaseQuantity($pro_id,Request $request)
-    {
-        $cart = Cart::find($pro_id);
-        $quantity = $cart->quantity +1;
+    {   
+        $cart = DB::table('carts')->where('pro_id','=',$pro_id)->first();
+        $quantity = $cart->quantity + 1;
         DB::table('carts')
             ->where('pro_id','=',$pro_id)
             ->update(
                 ['quantity' => $quantity]
             );
-            return redirect ('cart');    
+            return redirect ('cart');  
 
     }
 
     function decreaseQuantity($pro_id,Request $request)
     {
-        $cart = Cart::find($pro_id);
+        $cart = DB::table('carts')->where('pro_id','=',$pro_id)->first();
         $quantity = $cart->quantity - 1;
         if($quantity < 1)
         {

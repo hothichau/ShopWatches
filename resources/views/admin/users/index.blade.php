@@ -14,7 +14,7 @@
 </head>
 
 <body>
-    @include('partials/header')
+
     <center>
         <h3> Quản lý người dùng </h3>
         <a href="/user/home"><i class="fas fa-arrow-circle-left" style="width: 5em;"></i></a>
@@ -34,6 +34,7 @@
                     <th>Tên tài khoản</th>
                     <th>Mật khẩu</th>
                     <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
                     <th>Hình ảnh</th>
                     <th>Vai trò</th>
                     <th>Sửa</th>
@@ -44,13 +45,24 @@
                     <td> {{$users->username}} </td>
                     <td> {{$users->password}} </td>
                     <td> {{$users->phone}} </td>
+                    <td> {{$users->address}} </td>
                     <td>
                         <image src="{{'/storage/'.$users->image}} " style="height: 100px; width: 80px;">
                     </td>
-                    <td> {{$users->role}} </td>
-                    <form action='{{"/admin/users/".$users->id."/edit"}}' method="get">
-                        <td> <button type="submit" class="button button1"><i class="far fa-edit"></i></button></td>
-                    </form>
+                    <td> {{$users->role}} </td>  
+                        @if(Auth::user())
+                            @if(Auth::user()->role == $users->role )
+                            <form action='{{"/admin/users/".$users->id."/edit"}}' method="get">
+                                <td> <button type="submit" class="button button1"><i class="far fa-edit"></i></button></td>
+                            </form>
+                            @elseif(Auth::user()->role != $users->role )
+                                <td> <button type="submit" class="button button1" title = "Can not edit"><i class="fas fa-ban" ></i></button></td>
+                            @endif
+                        @endif
+                    
+                    
+                   
+                    
                     <form action='{{"/admin/users/".$users->id}}' method="POST">
                         @csrf
                         @method("DELETE")
@@ -60,8 +72,5 @@
                 @endforeach
 
     </table>
-    @include('partials/footer')
-
 </body>
-
 </html>

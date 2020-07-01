@@ -19,9 +19,8 @@ class LoginController extends Controller
     {   
         $request->validate([
             'username' => 'required',
-            'password' => 'required|unique:users|min:3'
-        ]);
-        
+            'password' => 'required',
+        ]); 
         $username = $request->input('username');
         $password = $request->input('password');
         

@@ -9,36 +9,24 @@
     <link rel="stylesheet" href="/css/partials/body.css">
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-    <!------ Include the above in your HEAD tag ---------->
-
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" />
 </head>
-
-<body>
+@include('partials/header')
+<body style = "background-image: url('http://mauweb.monamedia.net/gwatch/wp-content/uploads/2018/11/black_background_metal.jpg');">
     <div class="container">
-        <h3 class="h3" style = "color: white;">Tất cả sản phẩm </h3> 
-        <div style = "display: inline-flex;">
-            <span style = "color: white; margin-right: 5px;"> Sắp xếp theo giá:  </span> 
-            <form action="{{'/ascPrice'}}" method = "GET">
-                <button type="submit" class="btn btn-success" style = "margin-right: 5px;">Tăng dần</button> 
-            </form>
-            <form action="{{'/descPrice'}}" method = "GET">
-                <button type="submit" class="btn btn-success">Giảm dần</button>
-            </form>
-        </div>
+        <h3 class="h3" style = "color: white;">Tất cả sản phẩm/{{$categories}} </h3>
         <hr>
         <div class="row">
-            @foreach ($product as $watches)
+            @foreach ($procate as $watches)
             <?php 
             $discount = 0;
-            if($watches->getDisplayoldPrice() > 0){
+            if($watches->old_price > 0){
                 $discount = 100-($watches->new_price*100)/$watches->old_price;
            }
            $giamgia = round($discount, 0, PHP_ROUND_HALF_UP)."%";
            ?>
             
-            <div class="col-md-3 col-sm-6" >
+            <div class="col-md-3 col-sm-6">
                 <div class="product-grid6" style = "border: 1px solid white; height: auto; margin-bottom: 15px;">
                     <span class="product-new-label" style = "border: solid 1px white; height: auto; background-color: white; float: left;"><b>SALE</b></span>
                     <span class="product-discount-label" style = "border: solid 1px white; height: auto; background-color: white; float:right;"><b><?php echo $giamgia; ?></b></span>
@@ -51,8 +39,12 @@
 
                     <div class="product-content">
                         <h3 class="title"><a href="#">{{$watches->name}}</a></h3>
-                        <div class="price">{{$watches->getDisplayoldPrice()}}
-                            <span>{{$watches->getDisplaynewPrice()}}</span>
+                        <div class="price"><?php
+                                    echo number_format($watches->old_price,0,',','.')." vnđ";
+                                ?>
+                            <span><?php
+                                    echo number_format($watches->new_price,0,',','.')." vnđ";
+                                ?></span>
                         </div>
                     </div>
                     <ul class="social">
@@ -67,16 +59,10 @@
             </div>
             @endforeach
         </div>
-        <center>
-            <div class="pagination">
-                <a style="margin: 7px;" href="/user/home/?page={{$page-1}}"><i style="color: white"
-                        class="fas fa-backward" title="Previous"></i></a>
-                <a style="margin: 7px;" href="/user/home/?page={{$page+1}}"><i style="color: white"
-                        class="fas fa-forward" title="Next"></i></a>
-            </div>
-        </center>
+       
 
     </div>
+    @include('partials/footer')       
 </body>
 
 </html>

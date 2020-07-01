@@ -5,8 +5,10 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Admin\Users;
 use App\User;
+use App\Category;
 class UserController extends Controller
 {
     function operator()
@@ -16,7 +18,8 @@ class UserController extends Controller
     function index()
     {
         $users = User::all();
-        return view("admin/users/index",["index"=>$users]);
+        $category = Category::all();
+        return view("admin/users/index",["index"=>$users, "cate"=>$category]);
     }
 
     function edit($id)
@@ -31,9 +34,10 @@ class UserController extends Controller
         $password = $request->input("password");
         $role = "admin";
         $phone = $request->input("phone");
+        $address = $request->input("address");
         $filePath = $request->file('image')->store("public");
        
-        DB::table('products')->insert(["username"=>$name,"password"=>$password,"phone"=>$phone,"role"=>$role,"image"=>$filePath]);
+        DB::table('products')->insert(["username"=>$name,"password"=>$password,"phone"=>$phone,"address"=>$address,"role"=>$role,"image"=>$filePath]);
         return redirect('/admin/users');   
     }
 
@@ -41,13 +45,23 @@ class UserController extends Controller
     {
         $username = $request->username;
         $password = $request->password;
-        $hashPassword = Hash::make($password);
+        $address = $request->address;
+        $user_pass = DB::table('users')->where('id','=',$id)->first();
+        if($password == $user_pass->password)
+        {
+            $pass = $password;
+        }
+        else
+        {
+            $pass = Hash::make($password);
+        }
         $phoneNumber = $request->phone;
         $phone = (int) $phoneNumber;
         $role = "admin";
         $filePath = $request->file('image')->store("public");
-
-        DB::table('users')->where("id",$id)->update(["id"=>$id,"username"=>$username,"password"=>$hashPassword,"phone"=>$phone,"image"=> $filePath,"role"=>$role]);
+        
+        
+        DB::table('users')->where("id",$id)->update(["id"=>$id,"username"=>$username,"password"=>$pass,"phone"=>$phone,"address"=>$address,"image"=> $filePath,"role"=>$role]);
         return redirect('/admin/users');   
     }
 

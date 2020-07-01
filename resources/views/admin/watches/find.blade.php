@@ -17,21 +17,22 @@
 
 <body>
     <div class="container">
-        <h3 class="h3">Sản phẩm </h3>
+        <h5><a href="/user/home" style = "text-decoration: none;"><< Quay lại trang chủ</a></h5>
+        <h3 class="h5">Kết quả tìm kiếm trùng với từ khóa <span style = "color: red;">{{$search}}</span> </h3>
         <hr>
         <div class="row">
-        @foreach($research as $watches)
+        @foreach($product as $watches)
             <div class="col-md-3 col-sm-6">
-                <div class="product-grid6">
+                <div class="product-grid6" style = "border: 1px solid black; height: auto; margin-bottom: 15px;">
                     <div class="product-image6">
                         <a href="#">
                             <img class="pic-1" src="{{'/storage/'.$watches->image}}">
                         </a>
                     </div>
                     <div class="product-content">
-                        <h3 class="title"><a href="#">{{$watches->name}}</a></h3>
-                        <div class="price">{{$watches->old_price}}
-                            <span>{{$watches->new_price}}</span>
+                        <h3 class="title"><a style = "color: black;" href="#">{{$watches->name}}</a></h3>
+                        <div class="price" style = "color: black;" >{{$watches->getDisplayoldPrice()}}
+                            <span style = "color: black; ">{{$watches->getDisplaynewPrice()}}</span>
                         </div>
                     </div>
                     <ul class="social">

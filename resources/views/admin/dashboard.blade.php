@@ -8,9 +8,9 @@
         <link rel="stylesheet" href="/css/admin/admin.css">
     </head>
     <body>
-        @include('partials/header')
+    @include('partials/header')
         <center>
-         <div class = "dashboard" style = "padding-top: 80px;">
+         <div class = "dashboard" style = "padding-top: 100px;">
              <h3>hệ thống quản lý</h3>
              <form class = "button" action="/admin/users">
              <button type = "submit">quản lý người dùng</button>  <span>|</span>
@@ -21,10 +21,11 @@
              <form class = "button" action="/admin/categories">
              <button type = "submit">quản lý loại sản phẩm </button>  
              </form>
+             <form class = "button" action="/admin/orders">
+             <button type = "submit">quản lý đơn hàng </button>  
+             </form>
              </center>     
-             
-             
          </div>
-        @include('partials/footer')
+         @include('partials/footer')
     </body>
 </html>
