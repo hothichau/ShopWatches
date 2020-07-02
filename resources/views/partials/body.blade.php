@@ -16,6 +16,23 @@
 </head>
 
 <body>
+<?php 
+if(isset($_GET['addCart'])){
+    echo "<script> alert('".$_GET['addCart']."');</script>";
+}
+if(isset($_GET['toLogin'])){
+    echo "<script> alert('".$_GET['toLogin']."');</script>";
+}
+if(isset($_GET['order'])){
+    echo "<script> alert('".$_GET['order']."');</script>";
+}
+if(isset($_GET['noLogin'])){
+    echo "<script> alert('".$_GET['noLogin']."');</script>";
+}
+if(isset($_GET['noAdmin'])){
+    echo "<script> alert('".$_GET['noAdmin']."');</script>";
+}
+?>
     <div class="container">
         <h3 class="h3" style = "color: white;">Tất cả sản phẩm </h3> 
         <div style = "display: inline-flex;">

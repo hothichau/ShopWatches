@@ -46,7 +46,7 @@ class CartController extends Controller
                     DB::table('carts')->insert(
                         ['pro_id'=>$pro_id, 'quantity' => 1, 'user_id' => $user_id, 'date_order'=>$date]
                     );
-                    return redirect('cart');
+                    return redirect()->route('user.home',['addCart'=>'Thêm vào giỏ hàng thành công!']);
                 }
             }
             else
@@ -63,7 +63,7 @@ class CartController extends Controller
                 }
         }else
         {
-            return redirect()->route('auth.login',['Invalid username or password!']);
+            return redirect()->route('user.home',['toLogin'=>'Bạn cần phải đăng nhập để thêm sản phẩm vào giỏ hàng!']);
         }
         
     }

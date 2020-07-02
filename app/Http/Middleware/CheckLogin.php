@@ -17,14 +17,15 @@ class CheckLogin
     {
         if(!Auth::check())
         {
-         echo "Chưa đăng nhập vào trang web";
-         return redirect('/user/home');
+          
+          return redirect()->route('user.home',['noLogin'=>'Bạn chưa đăng nhập']);
         }
         $user = Auth::user();
           if($user->role != "admin")
-            {
-                return redirect("/user/home");
-             }
+          {
+            
+            return redirect()->route('user.home',['noAdmin'=>'Bạn không thể truy cập đến trang này']);
+          }
         return $next($request);
    
    }

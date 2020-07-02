@@ -55,54 +55,52 @@ class OrderController extends Controller
             $name = $request->username;
             $phone= $request->phone;
             $address= $request->address;
-            $discount = $request->code;
-            
-            $promote_code = Promotion::where('code', $discount)->value('value');
+            $discount = $request->code; 
 
-            $total_product = 0;
+
             $total_price = 0;
-            $fee = 35000;
             $arrayProduct = [];
             $bill = new Order();
+
+
+            $total_price = DB::table('carts')
+            ->where('user_id', $id_user)
+            ->join('products', 'carts.pro_id', '=', 'products.id')
+            ->sum(DB::raw('products.new_price * carts.quantity'));
+
             $carts = Cart::where('user_id',$id_user)->get();
-            foreach($carts as $item){
-                $bill->total_product+=$item->quantity;
-                $pro = Product::find($item->pro_id);
-                $bill->total_price+=$pro->new_price*$item->quantity;
-            
-                $arrayProduct[] = array(
+            $total_product = $carts->count();
+
+            foreach ($carts as $data) {
+
+                $pro = Product::find($data->pro_id);
+                
+                $item =
+                [
                 'image'=>$pro->image,
-                'name' =>$pro->name,
-                'quantity' =>$pro->quantity,
-                'price' =>$pro->new_price,
-                );
-
+                "name" => $pro->name,
+                "quantity" => $data->quantity,
+                "price" => $pro->new_price,
+                ];
+                array_push($arrayProduct, $item);
             }
-            
-            if($promote_code >0){
-            $total_price=$total_price +($promote_code * $total_product)/100 + $fee;
-            }else{
-            $total_price=$total_price +$total_product+ $fee;
-            }
-
+           
             $proDetail = json_encode($arrayProduct);    
-            //$discount = Promotion::all();
-    
             
-            $bill->user_id=$id_user;
-            $bill->username=$name;
-            $bill->phone=$phone;
-            $bill->address =$address;
+            $bill->user_id = $id_user;
+            $bill->username = $name;
+            $bill->phone = $phone;
+            $bill->address = $address;
             $bill->status = "Đang vận chuyển";
-            $bill->promote_value = 20;
-            //$info->percent =30;
+            $bill->promote_value = 0;
             $bill->total_price =  $total_price;
             $bill->total_product =  $total_product;
             $bill->product = $proDetail;
             $bill->payment = "Trả tiền mặt";
             $bill->save();
+
             $cart = Cart::where('user_id',$id_user)->delete();
-            return redirect('/user/home');
+            return redirect()->route('user.home',['order'=>'Đặt hàng thành công!']);
         }
     
     
@@ -110,15 +108,7 @@ class OrderController extends Controller
     function showBill()
     {
        $bill = Order::all();
-       foreach($bill as $b)
-       {
-           $b->user->username;
-           $b->user->phone;
-           $b->user->address;
-       }
-       return view('admin.orders.index',['index'=>$bill]);
+        return view('admin.orders.index',['index'=>$bill]);
         
     }
 }
-
-

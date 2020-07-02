@@ -95,3 +95,6 @@ Route::get('/bill', 'User\OrderController@showBill');
 Route::get('/ascPrice', 'User\HomeController@ascProductByPrice');
 Route::get('/descPrice', 'User\HomeController@descProductByPrice');
 
+//------------------------------Error---------------------------------
+//Route::get('/403', 'User\HomeController@ascProductByPrice');
+

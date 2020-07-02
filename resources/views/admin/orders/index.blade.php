@@ -19,7 +19,7 @@
 <body>
 
     <center>
-        <h3> Quản lý người dùng </h3>
+        <h3> Quản lý đơn đặt hàng </h3>
         <a href="/user/home"><i class="fas fa-arrow-circle-left" style="width: 5em;"></i></a>
         <a href="/admin/watches"><i class="fas fa-arrow-circle-right" style="width: 5em;"></i></a>
     </center>
@@ -45,7 +45,7 @@
                     <td> {{$bill->phone}} </td>
                     <td> {{$bill->address}} </td>
                     <td>
-                        <button type="button" data-toggle="modal" data-target="#myModal{{$model_id}}" class = "btn btn-success">View Detail</button>
+                        <button type="button" data-toggle="modal" data-target="#myModal{{$model_id}}" class = "btn btn-success">Xem</button>
 
                         <!-- Modal -->
                         <div class="modal fade" id="myModal{{$model_id}}" role="dialog">
@@ -60,7 +60,7 @@
                                         @foreach (json_decode($bill->product) as $p)
                                         <p>Name product: {{$p->name}}</p>
                                         <p>Quantity: {{$p->quantity}}</p>
-                                        <p>Price: {{$p->price}}</p>
+                                        <p>Price: <?php echo number_format($p->price,0,',','.')." vnđ" ?></p>
                                         <br>
                                         <hr>
                                         @endforeach
@@ -76,8 +76,13 @@
                     </td>
 
                     <td> {{$bill->promote_value}} % </td>
-                    <td> {{$bill->total_price}} </td>
+                    <td> <?php echo number_format($bill->total_price,0,',','.')." vnđ" ?> </td>
                     <td> {{$bill->status}} </td>
+                    <form action='' method="POST">
+                        @csrf
+                        @method("DELETE")
+                        <td> <button type="submit" class="button button1"><i class="far fa-calendar-times"></i></button> </td>
+                    </form>
                 </tr>
                 <?php $model_id++; ?>
                 @endforeach

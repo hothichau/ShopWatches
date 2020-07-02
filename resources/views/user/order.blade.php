@@ -12,6 +12,7 @@ form {
     padding: 20px;
     border-radius: 2%;
 	margin-left: 15px;
+	margin-top: 30px;
 
 }
 
@@ -69,7 +70,7 @@ body {
         
 	</div>
 	
-	<div class="" style = " position: absolute;margin-top: -315px; margin-left: 750px;">
+	<div class="" style = " position: absolute;margin-top: -333px; margin-left: 750px;">
 
 		<div class="col-xs-12">
 			<div class="panel panel-info">
@@ -95,11 +96,11 @@ body {
 						<div class="col-xs-2"><img class="img-responsive" src="{{'/storage/'.$pro->image }}">
 						</div>
 						<div class="col-xs-4">
-							<h4 class="product-name"><strong>{{ $pro->name}}</strong></h4><h6>Quantity: <small>{{ $cart->quantity}}</small></h6>
+							<h4 class="product-name"><strong>{{ $pro->name}}</strong></h4><h6>Số lượng: <small>{{ $cart->quantity}}</small></h6>
 						</div>
 						<div class="col-xs-6">
 							<div class="col-xs-6 text-right">
-								<h6>Price: <strong><?php
+								<h6>Tổng giá: <strong><?php
                                     echo number_format($pro->new_price * $cart->quantity,0,',','.')." vnđ";
                                 ?></strong></h6>
 							</div>
@@ -136,7 +137,7 @@ body {
 						<?php $fee = 35000; ?>
 						<h5 class="text-right">Fee ship: <small><?php echo number_format($fee,0,',','.')." vnđ" ?></small></h5>
 						<h5 class="text-right">Promotion code: <small><?php echo number_format(0,0,',','.')." vnđ" ?></small></h5>
-						<?php $total += $pro->new_price * $cart->quantity + $fee ?>
+						<?php $total += $fee ?>
 							<h4 class="text-right">Total: <strong><?php echo number_format($total,0,',','.')." vnđ" ?></strong></h4>
 						</div>
 						<div class="col-xs-3">
