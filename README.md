@@ -1,4 +1,4 @@
-Migration, Seeding, login / quản lý  CRUD cho trang Admin (seed 1 user admin + 1 user thường)	1
+<h3>Migration, Seeding, login / quản lý  CRUD cho trang Admin (seed 1 user admin + 1 user thường)	1 </h3>
 Show danh sách category ở menu ngang (1 category có nhiều product)	1
 Show dữ liệu product ra trang home page	1
 Validation + show error cho các form login, register, create, edit	0.5
