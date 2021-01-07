@@ -12,4 +12,4 @@
 <h3>12.  Sắp xếp sản phẩm	0.25</h3>
 <h3>13.  Bảo mật trang admin	0.125</h3>
 
-<h2> Tổng điểm: 7.875‬ </h2>
+
